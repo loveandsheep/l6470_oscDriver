@@ -26,10 +26,10 @@ void ofApp::update()
 			driver.sendSignal(RPI_L6470_SIG_DECEL	, 0x30);
 			driver.sendSignal(RPI_L6470_SIG_MAXSPEED, 0x20);
 			driver.sendSignal(RPI_L6470_SIG_MINSPEED, 0x0);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x5F);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x5F);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x5F);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x5F);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x1F);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x1F);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x1F);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x1F);
 			driver.sendSignal(RPI_L6470_SIG_ABSPOS, 0);
 			driver.sendSignal(RPI_L6470_SIG_GOTO, 0);
 			driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
