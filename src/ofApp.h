@@ -14,4 +14,9 @@ public:
 	ofxKsmrRPiToL6470	driver;
 	ofxOscReceiver		receiver;
 	
+	int setting_accel;
+	int setting_decel;
+	int setting_speed_max;
+	int setting_speed_min;
+	int setting_voltage;
 };

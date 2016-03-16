@@ -3,8 +3,13 @@
 void ofApp::setup()
 {
 	receiver.setup(12400);
-	
 	driver.setup(true, 1);
+	
+	setting_accel = 0x30;
+	setting_decel = 0x30;
+	setting_speed_max = 0x20;
+	setting_speed_min = 0x00;
+	setting_voltage = 0x1F;
 }
 
 void ofApp::update()
@@ -19,24 +24,56 @@ void ofApp::update()
 			driver.resetDevice();
 		}
 		
+		if (m.getAddress() == "/motor/setting/accel")
+		{
+			setting_accel = m.getArgAsInt32(0);
+			driver.sendSignal(RPI_L6470_SIG_ACCEL, setting_accel);
+		}
+		
+		if (m.getAddress() == "/motor/setting/decel")
+		{
+			setting_decel = m.getArgAsInt32(0);
+			driver.sendSignal(RPI_L6470_SIG_DECEL, setting_decel);
+		}
+		
+		if (m.getAddress() == "/motor/setting/speedMax")
+		{
+			setting_speed_max = m.getArgAsInt32(0);
+			driver.sendSignal(RPI_L6470_SIG_MAXSPEED, setting_speed_max);
+		}
+	
+		if (m.getAddress() == "/motor/setting/speedMin")
+		{
+			setting_speed_min = m.getArgAsInt32(0);
+			driver.sendSignal(RPI_L6470_SIG_MINSPEED, setting_speed_min);
+		}
+		
+		if (m.getAddress() == "/motor/setting/voltage")
+		{
+			setting_voltage = m.getArgAsInt32(0);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, setting_voltage);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, setting_voltage);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, setting_voltage);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, setting_voltage);
+		}
+		
 		if (m.getAddress() == "/motor/setting/init")
 		{
+			driver.resetDevice();
 			driver.enableAllMotor();
-			driver.sendSignal(RPI_L6470_SIG_ACCEL	, 0x30);
-			driver.sendSignal(RPI_L6470_SIG_DECEL	, 0x30);
-			driver.sendSignal(RPI_L6470_SIG_MAXSPEED, 0x20);
-			driver.sendSignal(RPI_L6470_SIG_MINSPEED, 0x0);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, 0x1F);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, 0x1F);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, 0x1F);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, 0x1F);
+			driver.sendSignal(RPI_L6470_SIG_ACCEL	, setting_accel);
+			driver.sendSignal(RPI_L6470_SIG_DECEL	, setting_decel);
+			driver.sendSignal(RPI_L6470_SIG_MAXSPEED, setting_speed_max);
+			driver.sendSignal(RPI_L6470_SIG_MINSPEED, setting_speed_min);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, setting_voltage);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, setting_voltage);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, setting_voltage);
+			driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, setting_voltage);
 			driver.sendSignal(RPI_L6470_SIG_ABSPOS, 0);
 			driver.sendSignal(RPI_L6470_SIG_GOTO, 0);
 			driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
 			driver.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 			driver.disableAllMotor();
-			
-			cout << "initialize" << endl;
 		}
 		
 		driver.enableAllMotor();
@@ -46,15 +83,12 @@ void ofApp::update()
 			driver.sendSignal(RPI_L6470_SIG_GOTO,
 							  m.getArgAsInt32(0));
 			
-			cout << "goto " << m.getArgAsInt32(0) << endl;
 		}
 		
 		if (m.getAddress() == "/motor/drive/run")
 		{
 			driver.sendSignal(RPI_L6470_SIG_RUN,
 							  m.getArgAsInt32(0));
-
-			cout << "move " << m.getArgAsInt32(0) << endl;
 		}
 		
 		if (m.getAddress() == "/motor/drive/stopHard")
@@ -62,7 +96,7 @@ void ofApp::update()
 			driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
 		}
 		
-		if (m.getAddress() == "/motor/drive/sropSoft")
+		if (m.getAddress() == "/motor/drive/stopSoft")
 		{
 			driver.sendSignal(RPI_L6470_SIG_STOP_SOFT, 0);
 		}
