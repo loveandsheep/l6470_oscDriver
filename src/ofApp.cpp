@@ -102,6 +102,11 @@ void ofApp::update()
 							  m.getArgAsInt32(1));
 		}
 		
+		if (m.getAddress() == "/system/shutdown")
+		{
+			system("sudo shutdown -h now");
+		}
+		
 		driver.disableAllMotor();
 	}
 }
