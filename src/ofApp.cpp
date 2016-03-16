@@ -12,7 +12,7 @@ void ofApp::update()
 	while (receiver.hasWaitingMessages())
 	{
 		ofxOscMessage m;
-		receiver.getNextMessage(m);
+		receiver.getNextMessage(&m);
 		
 		if (m.getAddress() == "/motor/setting/reset")
 		{
@@ -40,13 +40,13 @@ void ofApp::update()
 		if (m.getAddress() == "/motor/drive/goto")
 		{
 			driver.sendSignal(RPI_L6470_SIG_GOTO,
-							  m.getArgAsInt(0));
+							  m.getArgAsInt32(0));
 		}
 		
 		if (m.getAddress() == "/motor/drive/run")
 		{
 			driver.sendSignal(RPI_L6470_SIG_RUN,
-							  m.getArgAsInt(0));
+							  m.getArgAsInt32(0));
 		}
 		
 		if (m.getAddress() == "/motor/drive/stopHard")
@@ -61,8 +61,8 @@ void ofApp::update()
 		
 		if (m.getAddress() == "/motor/rawSignal")
 		{
-			driver.sendSignal(m.getArgAsInt(0),
-							  m.getArgAsInt(1));
+			driver.sendSignal(m.getArgAsInt32(0),
+							  m.getArgAsInt32(1));
 		}
 	}
 }
