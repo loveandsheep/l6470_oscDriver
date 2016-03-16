@@ -35,18 +35,24 @@ void ofApp::update()
 			driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
 			driver.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
 			driver.disableAllMotor();
+			
+			cout << "initialize" << endl;
 		}
 		
 		if (m.getAddress() == "/motor/drive/goto")
 		{
 			driver.sendSignal(RPI_L6470_SIG_GOTO,
 							  m.getArgAsInt32(0));
+			
+			cout << "goto " << m.getArgAsInt32(0) << endl;
 		}
 		
 		if (m.getAddress() == "/motor/drive/run")
 		{
 			driver.sendSignal(RPI_L6470_SIG_RUN,
 							  m.getArgAsInt32(0));
+
+			cout << "move " << m.getArgAsInt32(0) << endl;
 		}
 		
 		if (m.getAddress() == "/motor/drive/stopHard")
