@@ -21,6 +21,11 @@ void ofApp::update()
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
 		
+		if (m.getAddress() == "/call")
+		{
+			cout << "response" << endl;
+		}
+		
 		if (m.getAddress() == "/motor/setting/reset")
 		{
 			driver.resetDevice();
