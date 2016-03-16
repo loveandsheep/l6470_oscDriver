@@ -104,6 +104,7 @@ void ofApp::update()
 		
 		if (m.getAddress() == "/system/shutdown")
 		{
+			driver.sendSignal(RPI_L6470_SIG_STOP_SOFT, 0);
 			system("sudo shutdown -h now");
 		}
 		
