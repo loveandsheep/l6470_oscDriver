@@ -10,6 +10,8 @@ void ofApp::setup()
 	setting_speed_max = 0x20;
 	setting_speed_min = 0x00;
 	setting_voltage = 0x1F;
+	
+	init_motor();
 }
 
 void ofApp::update()
@@ -59,21 +61,7 @@ void ofApp::update()
 		
 		if (m.getAddress() == "/motor/setting/init")
 		{
-			driver.resetDevice();
-			driver.enableAllMotor();
-			driver.sendSignal(RPI_L6470_SIG_ACCEL	, setting_accel);
-			driver.sendSignal(RPI_L6470_SIG_DECEL	, setting_decel);
-			driver.sendSignal(RPI_L6470_SIG_MAXSPEED, setting_speed_max);
-			driver.sendSignal(RPI_L6470_SIG_MINSPEED, setting_speed_min);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, setting_voltage);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, setting_voltage);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, setting_voltage);
-			driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, setting_voltage);
-			driver.sendSignal(RPI_L6470_SIG_ABSPOS, 0);
-			driver.sendSignal(RPI_L6470_SIG_GOTO, 0);
-			driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
-			driver.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
-			driver.disableAllMotor();
+			init_motor();
 		}
 		
 		driver.enableAllMotor();
@@ -114,4 +102,23 @@ void ofApp::update()
 void ofApp::draw()
 {
 
+}
+
+void ofApp::init_motor()
+{
+	driver.resetDevice();
+	driver.enableAllMotor();
+	driver.sendSignal(RPI_L6470_SIG_ACCEL	, setting_accel);
+	driver.sendSignal(RPI_L6470_SIG_DECEL	, setting_decel);
+	driver.sendSignal(RPI_L6470_SIG_MAXSPEED, setting_speed_max);
+	driver.sendSignal(RPI_L6470_SIG_MINSPEED, setting_speed_min);
+	driver.sendSignal(RPI_L6470_SIG_VOLT_RUN, setting_voltage);
+	driver.sendSignal(RPI_L6470_SIG_VOLT_ACC, setting_voltage);
+	driver.sendSignal(RPI_L6470_SIG_VOLT_DEC, setting_voltage);
+	driver.sendSignal(RPI_L6470_SIG_VOLT_HOLD, setting_voltage);
+	driver.sendSignal(RPI_L6470_SIG_ABSPOS, 0);
+	driver.sendSignal(RPI_L6470_SIG_GOTO, 0);
+	driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
+	driver.sendSignal(RPI_L6470_SIG_STEPMODE, 0);
+	driver.disableAllMotor();
 }

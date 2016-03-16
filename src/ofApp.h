@@ -11,6 +11,8 @@ public:
 	void update();
 	void draw();
 	
+	void init_motor();
+	
 	ofxKsmrRPiToL6470	driver;
 	ofxOscReceiver		receiver;
 	
