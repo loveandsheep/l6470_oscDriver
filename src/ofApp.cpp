@@ -75,8 +75,15 @@ void ofApp::update()
 		
 		if (m.getAddress() == "/motor/drive/run")
 		{
-			driver.sendSignal(RPI_L6470_SIG_RUN,
-							  m.getArgAsInt32(0));
+			if (m.getArgAsInt32(0) < 0)
+			{
+				driver.sendSignal(RPI_L6470_SIG_RUN_INV,
+								  m.getArgAsInt32(0) * -1);
+			}else{
+				driver.sendSignal(RPI_L6470_SIG_RUN,
+								  m.getArgAsInt32(0));
+			}
+			
 		}
 		
 		if (m.getAddress() == "/motor/drive/stopHard")
