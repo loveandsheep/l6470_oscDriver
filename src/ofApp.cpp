@@ -91,6 +91,11 @@ void ofApp::update()
 			
 		}
 		
+		if (m.getAddress() == "/motor/setting/stepmode")
+		{
+			driver.sendSignal(RPI_L6470_SIG_STEPMODE, m.getArgAsInt32(0));
+		}
+		
 		if (m.getAddress() == "/motor/drive/stopHard")
 		{
 			driver.sendSignal(RPI_L6470_SIG_STOP_HARD, 0);
