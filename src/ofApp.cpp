@@ -26,17 +26,6 @@ void ofApp::update()
 			cout << "response" << endl;
 		}
 		
-		if (m.getAddress() == "/motor/raw")
-		{
-			cout << "rawSig :";
-			std::cout << std::hex << int(m.getArgAsInt32(0) & 0xFF) << std::endl;
-			
-			int val = (m.getNumArgs() > 1 ? m.getArgAsInt32(1) : 0);
-			driver.sendSignal(m.getArgAsInt32(0) & 0xFF, val);
-		}
-		
-		
-		
 		if (m.getAddress() == "/motor/step")
 		{
 			driver.step(m.getArgAsInt32(0));
@@ -137,6 +126,12 @@ void ofApp::update()
 		{
 			driver.sendSignal(RPI_L6470_SIG_STOP_SOFT, 0);
 			system("sudo shutdown -h now");
+		}
+		
+		if (m.getAddress() == "/motor/raw")
+		{
+			int val = (m.getNumArgs() > 1 ? m.getArgAsInt32(1) : 0);
+			driver.sendSignal(m.getArgAsInt32(0) & 0xFF, val);
 		}
 		
 		driver.disableAllMotor();
