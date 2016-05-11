@@ -21,6 +21,14 @@ void ofxKsmrRPiToL6470::setup(bool callGPIOSetup, int numMotor)
 		printf("GPIO ERROR! \n");
 	}
 	pinMode(RPI_L6470_SS_PIN, OUTPUT);
+	pinMode(RPI_L6470_STEP_PIN_1, OUTPUT);
+	pinMode(RPI_L6470_STEP_PIN_2, OUTPUT);
+	pinMode(RPI_L6470_STEP_PIN_3, OUTPUT);
+	pinMode(RPI_L6470_STEP_PIN_4, OUTPUT);
+	digitalWrite(RPI_L6470_STEP_PIN_1, 0);
+	digitalWrite(RPI_L6470_STEP_PIN_2, 0);
+	digitalWrite(RPI_L6470_STEP_PIN_3, 0);
+	digitalWrite(RPI_L6470_STEP_PIN_4, 0);
 	digitalWrite(RPI_L6470_SS_PIN, 1);
 	
 	
