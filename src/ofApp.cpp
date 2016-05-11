@@ -28,6 +28,9 @@ void ofApp::update()
 		
 		if (m.getAddress() == "/motor/raw")
 		{
+			cout << "rawSig :";
+			std::cout << std::hex << int(m.getArgAsInt32(0) & 0xFF) << std::endl;
+			
 			int val = (m.getNumArgs() > 1 ? m.getArgAsInt32(1) : 0);
 			driver.sendSignal(m.getArgAsInt32(0) & 0xFF, val);
 		}
