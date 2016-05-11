@@ -12,6 +12,8 @@ void ofApp::setup()
 	setting_voltage = 0xAF;
 	
 	init_motor();
+	
+	step_int = 1;
 }
 
 void ofApp::update()

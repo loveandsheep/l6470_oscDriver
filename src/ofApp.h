@@ -22,5 +22,5 @@ public:
 	int setting_speed_min;
 	int setting_voltage;
 	
-	int step_int = 1;
+	int step_int;
 };
