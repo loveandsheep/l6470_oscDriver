@@ -5,11 +5,11 @@ void ofApp::setup()
 	receiver.setup(12400);
 	driver.setup(true, 1);
 	
-	setting_accel = 0x30;
-	setting_decel = 0x30;
+	setting_accel = 0xF0;
+	setting_decel = 0xF0;
 	setting_speed_max = 0x20;
 	setting_speed_min = 0x00;
-	setting_voltage = 0x1F;
+	setting_voltage = 0xAF;
 	
 	init_motor();
 }
