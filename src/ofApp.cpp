@@ -32,7 +32,9 @@ void ofApp::update()
 			driver.sendSignal(m.getArgAsInt32(0), val);
 		}
 		
-		if (m.getAddress() == "motor/step")
+		
+		
+		if (m.getAddress() == "/motor/step")
 		{
 			driver.step(m.getArgAsInt32(0));
 		}
@@ -52,6 +54,11 @@ void ofApp::update()
 		{
 			setting_decel = m.getArgAsInt32(0);
 			driver.sendSignal(RPI_L6470_SIG_DECEL, setting_decel);
+		}
+		
+		if (m.getAddress() == "/motor/stepmode")
+		{
+			driver.sendSignal(RPI_L6470_SIG_STEPMODE, m.getArgAsInt32(0));
 		}
 		
 		if (m.getAddress() == "/motor/setting/speedMax")
