@@ -29,7 +29,7 @@ void ofApp::update()
 		if (m.getAddress() == "/motor/raw")
 		{
 			int val = (m.getNumArgs() > 1 ? m.getArgAsInt32(1) : 0);
-			driver.sendSignal(m.getArgAsInt32(0), val);
+			driver.sendSignal(m.getArgAsInt32(0) & 0xFF, val);
 		}
 		
 		
