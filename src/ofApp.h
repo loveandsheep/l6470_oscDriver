@@ -21,4 +21,6 @@ public:
 	int setting_speed_max;
 	int setting_speed_min;
 	int setting_voltage;
+	
+	int step_int = 1;
 };

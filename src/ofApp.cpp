@@ -16,10 +16,15 @@ void ofApp::setup()
 
 void ofApp::update()
 {
+	if (ofGetFrameNum() % step_int == 0) driver.step(0);
+	
 	while (receiver.hasWaitingMessages())
 	{
 		ofxOscMessage m;
 		receiver.getNextMessage(&m);
+		
+		if (m.getAddress() == "/interval")
+			step_int = MAX(1, m.getArgAsInt32(0));
 		
 		if (m.getAddress() == "/call")
 		{
