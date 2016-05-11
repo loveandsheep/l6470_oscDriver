@@ -18,6 +18,11 @@
 #endif
 
 #define RPI_L6470_SS_PIN 25
+#define RPI_L6470_STEP_PIN_1 29
+#define RPI_L6470_STEP_PIN_2 31
+#define RPI_L6470_STEP_PIN_3 33
+#define RPI_L6470_STEP_PIN_4 35
+
 #define SPI_CHANNEL 0
 
 #define RPI_L6470_SIG_ABSPOS		0x01
@@ -40,6 +45,8 @@
 #define RPI_L6470_SIG_STOP_SOFT		0xb0
 #define RPI_L6470_SIG_STOP_HARD		0xb8
 
+#define RPI_L6470_SIG_STEP			0x58
+#define RPI_L6470_SIG_STEP_INV		0x59
 
 class ofxKsmrRPiToL6470{
 public:
@@ -51,6 +58,8 @@ public:
 	void disableMotor(int index);
 	void enableAllMotor();
 	void disableAllMotor();
+	
+	void step(int num);
 	
 	void sendSignal(unsigned char cmd, int val);
 	

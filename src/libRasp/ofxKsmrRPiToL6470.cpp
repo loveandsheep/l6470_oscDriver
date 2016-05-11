@@ -185,3 +185,17 @@ void ofxKsmrRPiToL6470::disableAllMotor()
 {
 	for (int i = 0;i < motorFlg.size();i++) motorFlg[i] = false;
 }
+
+void ofxKsmrRPiToL6470::step(int num)
+{
+	int pin			  = RPI_L6470_STEP_PIN_1;
+	if (num == 1) pin = RPI_L6470_STEP_PIN_2;
+	if (num == 2) pin = RPI_L6470_STEP_PIN_3;
+	if (num == 3) pin = RPI_L6470_STEP_PIN_4;
+	
+#ifndef TARGET_OSX
+	digitalWrite(pin, 1);
+	usleep(100);
+	digitalWrite(pin, 0);
+#endif
+}

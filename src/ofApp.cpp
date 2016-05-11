@@ -26,6 +26,17 @@ void ofApp::update()
 			cout << "response" << endl;
 		}
 		
+		if (m.getAddress() == "/motor/raw")
+		{
+			int val = (m.getNumArgs() > 1 ? m.getArgAsInt32(1) : 0);
+			driver.sendSignal(m.getArgAsInt32(0), val);
+		}
+		
+		if (m.getAddress() == "motor/step")
+		{
+			driver.step(m.getArgAsInt32(0));
+		}
+		
 		if (m.getAddress() == "/motor/setting/reset")
 		{
 			driver.resetDevice();
