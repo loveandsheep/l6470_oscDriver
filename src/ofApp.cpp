@@ -141,6 +141,16 @@ void ofApp::update()
 			driver.sendSignal(m.getArgAsInt32(0) & 0xFF, val);
 		}
 		
+		if (m.getAddress() == "/test/step128")
+		{
+			driver.sendSignal(RPI_L6470_SIG_STOP_HARDHIZ, 0);
+			driver.sendSignal(RPI_L6470_SIG_STEPMODE, 7);
+			driver.sendSignal(RPI_L6470_SIG_STEP, 0);
+			for (int i = 0;i < 128 * 200;i++) driver.step(0);
+			driver.sendSignal(RPI_L6470_SIG_STEP_INV, 0);
+			for (int i = 0;i < 128 * 200;i++) driver.step(0);
+		}
+		
 		driver.disableAllMotor();
 	}
 }
