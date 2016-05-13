@@ -203,7 +203,7 @@ void ofxKsmrRPiToL6470::step(int num)
 	
 #ifndef TARGET_OSX
 	digitalWrite(pin, 1);
-	usleep(5);
+	usleep(10);
 	digitalWrite(pin, 0);
 #endif
 }
