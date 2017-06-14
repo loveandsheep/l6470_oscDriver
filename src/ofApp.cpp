@@ -46,13 +46,17 @@ void ofApp::update()
 		if (m.getAddress() == "/motor/setting/accel")
 		{
 			setting_accel = m.getArgAsInt32(0);
+			driver.enableAllMotor();
 			driver.sendSignal(RPI_L6470_SIG_ACCEL, setting_accel);
+			driver.disableAllMotor();
 		}
 		
 		if (m.getAddress() == "/motor/setting/decel")
 		{
 			setting_decel = m.getArgAsInt32(0);
+			driver.enableAllMotor();
 			driver.sendSignal(RPI_L6470_SIG_DECEL, setting_decel);
+			driver.disableAllMotor();
 		}
 		
 		if (m.getAddress() == "/motor/stepmode")
@@ -106,6 +110,16 @@ void ofApp::update()
 								  m.getArgAsInt32(0));
 			}
 			
+		}
+		
+		if (m.getAddress() == "/motor/drive/softHiz")
+		{
+			driver.sendSignal(RPI_L6470_SIG_STOP_SOFTHIZ, 0);
+		}
+		
+		if (m.getAddress() == "/motor/drive/hardHiz")
+		{
+			driver.sendSignal(RPI_L6470_SIG_STOP_HARDHIZ, 0);
 		}
 		
 		if (m.getAddress() == "/motor/setting/stepmode")
